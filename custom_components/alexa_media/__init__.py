@@ -1153,9 +1153,21 @@ async def setup_alexa(hass, config_entry, login_obj: AlexaLogin):
                             {"notification_update": json_payload},
                         )
                 elif command in [
+                    "PUSH_TODO_CHANGE",
+                    "PUSH_LIST_CHANGE",
+                    "PUSH_LIST_ITEM_CHANGE",
+                ]:
+                    destinationUserId = json_payload["destinationUserId"]
+                    eventName = json_payload["eventName"] # itemCreated, itemUpdated (including checked ToDo), itemDeleted
+                    listId = json_payload["listId"]
+                    listItemVersion = json_payload["version"]
+                    listItemId = json_payload["listItemId"]
+
+                    _LOGGER.warning(
+                        "YAML configuration of Alexa Media Player is deprecated "
+                    )
+                elif command in [
                     "PUSH_DELETE_DOPPLER_ACTIVITIES",  # delete Alexa history
-                    "PUSH_LIST_CHANGE",  # clear a shopping list https://github.com/alandtse/alexa_media_player/issues/1190
-                    "PUSH_LIST_ITEM_CHANGE",  # update shopping list
                     "PUSH_CONTENT_FOCUS_CHANGE",  # likely prime related refocus
                     "PUSH_DEVICE_SETUP_STATE_CHANGE",  # likely device changes mid setup
                     "PUSH_MEDIA_PREFERENCE_CHANGE",  # disliking or liking songs, https://github.com/alandtse/alexa_media_player/issues/1599
