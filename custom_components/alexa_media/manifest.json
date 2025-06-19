@@ -1,6 +1,6 @@
 {
   "domain": "alexa_media",
-  "name": "Alexa Media Player",
+  "name": "Alexa Media Player2",
   "codeowners": ["@alandtse", "@keatontaylor"],
   "config_flow": true,
   "dependencies": ["persistent_notification", "http"],
